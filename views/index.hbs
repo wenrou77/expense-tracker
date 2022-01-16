@@ -1,0 +1,65 @@
+<!-- search bar -->
+<div class="container search-bar">
+  <div class="search-bar-outer">
+    <div class="search-bar-inner">
+      <form action="/search">
+        <div class="input-group">
+          <div class="mb-4">
+            <input list="title-sort" name="sorting" class="form-control" style="width:250px" placeholder="類別">
+            <datalist id="title-sort">
+              <option>家居物業</option>
+              <option>交通出行</option>
+              <option>休閒娛樂</option>
+              <option>餐飲食品</option>
+              <option>其他</option>
+            </datalist>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- total amount -->
+<div class="total-amount row d-flex align-items-center mb-3">
+  <div class="col-3">
+    <h5>總金額：</h5>
+  </div>
+  <div class="col-9" style="color:orangered">
+    <h1>25260</h1>
+  </div>
+</div>
+
+<!-- expense list -->
+<ul class="list-group">
+  {{#each todos}}
+  <li class="list-group-item">
+    <div class="row d-flex align-items-center">
+      <div class="col-1">
+        <span style="font-size: 3em; color: skyblue;">
+          <i class="fas fa-home"></i>
+        </span>
+      </div>
+      <div class="col-6">
+        <h5 class="mx-2 my-1">
+          {{ this.name }}
+        </h5>
+        <p class="mx-2 my-1" style="font-size:14px">
+          {{this.date}}2021/1/2
+        </p>
+      </div>
+      <div class="col-2">
+        <h6 style="display: inline-block">
+          60{{this.amount}}
+        </h6>
+      </div>
+      <div class="col-3">
+        <a class="btn btn-light" href="./todos/{{ this._id }}/edit">修改</a>
+        <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn btn-light" type="submit">刪除</button>
+        </form>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+</ul>
+<a href="/todos/new" class="btn btn-primary mt-3">新增支出</a>
