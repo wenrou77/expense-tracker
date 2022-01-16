@@ -4,6 +4,7 @@
 
 This is a website created by node.js Express. 
 使用者可以：
+
 1. 註冊帳號
 - 註冊之後，可以登入/登出
 - 只有登入狀態的使用者可以看到 app 內容，否則一律被導向登入頁
