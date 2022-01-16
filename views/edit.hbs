@@ -1,9 +1,44 @@
-<form action="/todos/{{ todo._id }}?_method=PUT" method="POST" style="display: inline;">
-  <div class="input-group">
-    <div class="input-group-text">
-      <input type="checkbox" class="form-check-input mt-0" name="isDone" {{#if todo.isDone }} checked {{/if}}>
+<form action="/expenses/{{ expense._id }}?_method=PUT" method="POST" style="display: inline;">
+  <div class="container-sm m-5" style="text-align: center">
+    <div class="row mb-3">
+      <div class="col-sm-2">
+        <p style="font-size:10px">*必填欄位</p>
+      </div>
+      <div class="col-sm-3">
+        <h5>請修改你的支出</h5>
+      </div>
     </div>
-    <input class="form-control" type="text" placeholder="name" name="name" value="{{ todo.name }}">
-    <button class="btn btn-success" type="submit">Save</button>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <label class="form-label">名稱*：</label>
+          <input class="form-control" type="text" style="width:200px; display:inline" placeholder=""
+            value="{{ expense.name }}" name="name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">日期*：</label>
+          <input class="form-control" type="date" style="width:200px; display:inline" value="{{ expense.date }}"
+            name="date">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">類別*：</label>
+          <input list="titles" class="form-control" style="width:200px; display:inline" value="{{this.category}}"
+            name="category">
+          <datalist id="titles">
+            <option>家居物業</option>
+            <option>交通出行</option>
+            <option>休閒娛樂</option>
+            <option>餐飲食品</option>
+            <option>其他</option>
+          </datalist>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">金額*：</label>
+          <input class="form-control" style="width:200px; display:inline" placeholder="" value="{{ expense.amount }}"
+            name="amount">
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-primary">送出</button>
+      </div>
+    </div>
   </div>
 </form>
