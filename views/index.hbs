@@ -5,7 +5,7 @@
       <form action="/search">
         <div class="input-group">
           <div class="mb-4">
-            <input list="title-sort" name="sorting" class="form-control" style="width:250px" placeholder="類別">
+            <input list="title-sort" name="category" class="form-control" style="width:250px" placeholder="類別">
             <datalist id="title-sort">
               <option>家居物業</option>
               <option>交通出行</option>
@@ -14,24 +14,28 @@
               <option>其他</option>
             </datalist>
           </div>
+          <div class="input-group-append">
+            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+          </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+
 <!-- total amount -->
 <div class="total-amount row d-flex align-items-center mb-3">
   <div class="col-3">
     <h5>總金額：</h5>
   </div>
   <div class="col-9" style="color:orangered">
-    <h1>25260</h1>
+    <h1>{{totalAmount}}</h1>
   </div>
 </div>
 
 <!-- expense list -->
 <ul class="list-group">
-  {{#each todos}}
+  {{#each expense}}
   <li class="list-group-item">
     <div class="row d-flex align-items-center">
       <div class="col-1">
@@ -44,17 +48,17 @@
           {{ this.name }}
         </h5>
         <p class="mx-2 my-1" style="font-size:14px">
-          {{this.date}}2021/1/2
+          {{this.date}}
         </p>
       </div>
       <div class="col-2">
         <h6 style="display: inline-block">
-          60{{this.amount}}
+          {{this.amount}}
         </h6>
       </div>
       <div class="col-3">
-        <a class="btn btn-light" href="./todos/{{ this._id }}/edit">修改</a>
-        <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+        <a class="btn btn-light" href="./expenses/{{ this._id }}/edit">修改</a>
+        <form action="./expenses/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-light" type="submit">刪除</button>
         </form>
       </div>
@@ -62,4 +66,4 @@
   </li>
   {{/each}}
 </ul>
-<a href="/todos/new" class="btn btn-primary mt-3">新增支出</a>
+<a href="/expenses/new" class="btn btn-primary mt-3">新增支出</a>

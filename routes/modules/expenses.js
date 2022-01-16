@@ -26,16 +26,6 @@ router.get('/:id/edit', (req, res) => {
     .then(expense => res.render('edit', { expense }))
     .catch(error => console.log(error))
 })
-router.get('/:id', (req, res) => {
-  const userId = req.user._id
-  const _id = req.params.id
-  const id = req.params.restaurant_id
-  return Expense.findOne({ id, userId })
-    .lean()
-    .then(expense => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
 router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
@@ -48,8 +38,16 @@ router.put('/:id', (req, res) => {
       expense.amount = request.amount
       return expense.save()
     })
-    //.then(() => res.redirect(`/expenses/${_id}`))
     .then(() => res.redirect(`/expenses/${_id}`))
+    .catch(error => console.log(error))
+})
+
+//查詢
+router.get('/:id', (req, res) => {
+  const userId = req.user._id
+  return Expense.findOne({ userId })
+    .lean()
+    .then(expense => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
@@ -62,4 +60,5 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
 module.exports = router

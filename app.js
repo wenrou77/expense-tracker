@@ -11,7 +11,7 @@ require('./config/mongoose')
 
 const routes = require('./routes')
 const usePassport = require('./config/passport')
-const Todo = require('./models/todo')
+const Expense = require('./models/expense')
 
 const app = express()
 const PORT = process.env.PORT
