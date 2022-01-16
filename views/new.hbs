@@ -1,7 +1,43 @@
-<!-- ./views/layouts/new.handlebars -->
-<form action="/todos" method="POST" style="display: inline;">
-  <div class="input-group">
-    <input class="form-control" type="text" placeholder="name" name="name">
-    <button class="btn btn-success" type="submit">Create</button>
+<form action="/expenses" method="POST" style="display: inline;">
+  <div class="container-sm m-5" style="text-align: center">
+    <div class="row mb-3">
+      <div class="col-sm-2">
+        <p style="font-size:10px">*必填欄位</p>
+      </div>
+      <div class="col-sm-3">
+        <h5>請輸入你的支出</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="mb-3">
+          <label class="form-label">名稱*：</label>
+          <input class="form-control" type="text" style="width:200px; display:inline" placeholder="" name="name"
+            required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">日期*：</label>
+          <input class="form-control" type="date" style="width:200px; display:inline" placeholder="" name="date"
+            required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">類別*：</label>
+          <input list="titles" class="form-control" style="width:200px; display:inline" name="category"
+            placeholder="Select">
+          <datalist id="titles">
+            <option>家居物業</option>
+            <option>交通出行</option>
+            <option>休閒娛樂</option>
+            <option>餐飲食品</option>
+            <option>其他</option>
+          </datalist>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">金額*：</label>
+          <input class="form-control" style="width:200px; display:inline" placeholder="" name="amount">
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-primary">新增支出</button>
+      </div>
+    </div>
   </div>
 </form>
