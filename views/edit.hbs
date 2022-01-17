@@ -17,12 +17,12 @@
         </div>
         <div class="mb-3">
           <label class="form-label">日期*：</label>
-          <input class="form-control" type="date" style="width:200px; display:inline" value="{{ expense.date }}"
+          <input class="form-control" type="date" style="width:200px; display:inline" value="{{ yyyy }}-{{mm}}-{{dd}}"
             name="date">
         </div>
         <div class="mb-3">
           <label class="form-label">類別*：</label>
-          <input list="titles" class="form-control" style="width:200px; display:inline" value="{{this.category}}"
+          <input list="titles" class="form-control" style="width:200px; display:inline" value="{{expense.category}}"
             name="category">
           <datalist id="titles">
             <option>家居物業</option>

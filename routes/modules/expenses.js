@@ -23,7 +23,12 @@ router.get('/:id/edit', (req, res) => {
   const _id = req.params.id
   return Expense.findOne({ _id, userId })
     .lean()
-    .then(expense => res.render('edit', { expense }))
+    .then(expense => {
+      let yyyy = JSON.stringify(expense.date).slice(1, 5)
+      let mm = JSON.stringify(expense.date).slice(6, 8)
+      let dd = JSON.stringify(expense.date).slice(9, 11)
+      res.render('edit', { expense, yyyy, mm, dd })
+    })
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {
