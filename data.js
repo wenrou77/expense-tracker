@@ -1,9 +1,26 @@
 const CATEGORY = {
-  家居物業: 'fas fa-home',
-  交通出行: 'fas fa-shuttle-van',
-  休閒娛樂: 'fas fa-grin-beam',
-  餐飲食品: 'fas fa-utensils',
-  其他: 'fas fa-pen'
+  "results": [
+    {
+      "name": "家居物業",
+      "icon": "fas fa-home"
+    },
+    {
+      "name": "交通出行",
+      "icon": "fas fa-shuttle-van"
+    },
+    {
+      "name": "休閒娛樂",
+      "icon": "fas fa-grin-beam"
+    },
+    {
+      "name": "餐飲食品",
+      "icon": "fas fa-utensils"
+    },
+    {
+      "name": "其他",
+      "icon": "fas fa-pen"
+    }
+  ]
 }
 
 module.exports = CATEGORY

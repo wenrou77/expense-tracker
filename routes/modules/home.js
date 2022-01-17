@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const moment = require('moment')
 const Expense = require('../../models/expense')
-const CATEGORY = require('../../data.js')
+const CATEGORY = require('../../data.js').results
 
 // 定義首頁路由
 router.get('/', (req, res) => {
@@ -10,9 +11,13 @@ router.get('/', (req, res) => {
     .lean()
     .then(expense => {
       let totalAmount = 0
-      expense.forEach(element => totalAmount += element.amount)
-
-    }res.render('index', { expense, totalAmount }))
+      expense.forEach(element => {
+        totalAmount += element.amount
+        element.date = moment(element.date).format("YYYY-MM-DD")
+        element.icon = CATEGORY.find(category => category.name === element.category).icon
+      })
+      res.render('index', { expense, totalAmount })
+    })
     .catch(error => console.error(error))
 })
 
@@ -25,7 +30,11 @@ router.get('/search', (req, res) => {
     .then(expense => {
       const filteredExpenses = expense.filter(element => element.category === category)
       let totalAmount = 0
-      expense.forEach(element => totalAmount += element.amount)
+      expense.forEach(element => {
+        totalAmount += element.amount
+        element.date = moment(element.date).format("YYYY-MM-DD")
+        element.icon = CATEGORY.find(category => category.name === element.category).icon
+      })
       res.render('index', { expense: filteredExpenses, totalAmount })
     })
     .catch(err => console.log(err))
