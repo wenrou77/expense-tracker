@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const moment = require('moment')
 const Expense = require('../../models/expense')
-const CATEGORY = require('../../data.js').results
+const CATEGORY = require('../../data.js')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
       expense.forEach(element => {
         totalAmount += element.amount
         element.date = moment(element.date).format("YYYY-MM-DD")
-        element.icon = CATEGORY.find(category => category.name === element.category).icon
+        element.icon = CATEGORY.results.find(category => category.name === element.category).icon
       })
       res.render('index', { expense, totalAmount })
     })
