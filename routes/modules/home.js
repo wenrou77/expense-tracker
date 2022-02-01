@@ -33,7 +33,7 @@ router.get('/search', (req, res) => {
       expense.forEach(element => {
         totalAmount += element.amount
         element.date = moment(element.date).format("YYYY-MM-DD")
-        element.icon = CATEGORY.find(category => category.name === element.category).icon
+        element.icon = CATEGORY.results.find(category => category.name === element.category).icon
       })
       res.render('index', { expense: filteredExpenses, totalAmount })
     })
