@@ -40,7 +40,7 @@ npm run dev
 ```
 - Login using testing account
 ```
-email: 'user1@example.com'
+email: 'root@example.com'
 password: '12345678'
 ```
 
