@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
   const userId = req.user._id
   const category = req.query.category
-  Expense.find({ category })
+  Expense.find({ category, userId })
     .lean()
     .then(expense => {
       const filteredExpenses = expense.filter(element => element.category === category)
