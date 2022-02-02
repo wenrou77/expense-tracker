@@ -5,14 +5,12 @@
       <form action="/search">
         <div class="input-group">
           <div class="mb-4">
-            <input list="title-sort" name="category" class="form-control" style="width:250px" placeholder="類別">
-            <datalist id="title-sort">
-              <option>家居物業</option>
-              <option>交通出行</option>
-              <option>休閒娛樂</option>
-              <option>餐飲食品</option>
-              <option>其他</option>
-            </datalist>
+            <select id="categoryId" name="categoryId" class="form-control" style="width:200px; display:inline" required>
+              {{#each categories}}
+                <option value="{{this._id}}">{{this.name}}</option>
+              {{/each}}
+              <option value="6">全部顯示</option>
+            </select>
           </div>
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
@@ -22,6 +20,8 @@
     </div>
   </div>
 </div>
+
+<span>{{ warning_msg }}</span>
 
 <!-- total amount -->
 <div class="total-amount row d-flex align-items-center mb-3">
@@ -33,9 +33,9 @@
   </div>
 </div>
 
-<!-- expense list -->
+<!-- record list -->
 <ul class="list-group">
-  {{#each expense}}
+  {{#each record}}
   <li class="list-group-item">
     <div class="row d-flex align-items-center">
       <div class="col-1">
@@ -57,8 +57,8 @@
         </h6>
       </div>
       <div class="col-3">
-        <a class="btn btn-light" href="./expenses/{{ this._id }}/edit">修改</a>
-        <form action="./expenses/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+        <a class="btn btn-light" href="./records/{{ this._id }}/edit">修改</a>
+        <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-light" type="submit">刪除</button>
         </form>
       </div>
@@ -66,4 +66,4 @@
   </li>
   {{/each}}
 </ul>
-<a href="/expenses/new" class="btn btn-primary mt-3">新增支出</a>
+<a href="/records/new" class="btn btn-primary mt-3">新增支出</a>

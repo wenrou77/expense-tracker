@@ -24,8 +24,9 @@ git clone https://github.com/wenrou77/expense-tracker.git
 ```
 
 2. Initialization
+- install packages
 ```
-npm install  //install packages
+npm install
 ```
 
 3. Execute

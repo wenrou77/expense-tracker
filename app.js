@@ -11,7 +11,7 @@ require('./config/mongoose')
 
 const routes = require('./routes')
 const usePassport = require('./config/passport')
-const Expense = require('./models/expense')
+const Record = require('./models/record')
 
 const app = express()
 const PORT = process.env.PORT || 3000

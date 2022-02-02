@@ -1,22 +1,29 @@
 const express = require('express')
 const router = express.Router()
 const moment = require('moment')
-const Expense = require('../../models/expense')
-const CATEGORY = require('../../data.js')
+const Record = require('../../models/record')
+const Category = require('../../models/category')
 
-// 定義首頁路由
+// 首頁
 router.get('/', (req, res) => {
   const userId = req.user._id
-  Expense.find({ userId })
+  Record.find({ userId })
     .lean()
-    .then(expense => {
+    .then(record => {
       let totalAmount = 0
-      expense.forEach(element => {
+      record.forEach(element => {
         totalAmount += element.amount
         element.date = moment(element.date).format("YYYY-MM-DD")
-        element.icon = CATEGORY.results.find(category => category.name === element.category).icon
+        Category.findOne({ "_id": element.categoryId})
+          .lean()
+          .then(category => element.icon = category.icon)
       })
-      res.render('index', { expense, totalAmount })
+      Category.find()
+        .lean()
+        .then((categories) => {
+          return res.render('index', { record, totalAmount, categories })
+        })
+        .catch(error => console.log(error))
     })
     .catch(error => console.error(error))
 })
@@ -24,20 +31,32 @@ router.get('/', (req, res) => {
 //搜尋
 router.get('/search', (req, res) => {
   const userId = req.user._id
-  const category = req.query.category
-  Expense.find({ category, userId })
-    .lean()
-    .then(expense => {
-      const filteredExpenses = expense.filter(element => element.category === category)
-      let totalAmount = 0
-      expense.forEach(element => {
-        totalAmount += element.amount
-        element.date = moment(element.date).format("YYYY-MM-DD")
-        element.icon = CATEGORY.results.find(category => category.name === element.category).icon
+  const categoryId = req.query.categoryId
+  if ( categoryId != 6 ) {
+    Record.find({ categoryId, userId })
+      .lean()
+      .then(record => {
+        const filteredRecords = record.filter(element => element.categoryId == categoryId)
+        let totalAmount = 0
+        record.forEach(element => {
+          totalAmount += element.amount
+          element.date = moment(element.date).format("YYYY-MM-DD")
+          Category.findOne({ "_id": element.categoryId })
+            .lean()
+            .then(category => element.icon = category.icon)
+        })
+        Category.find()
+          .lean()
+          .then((categories) => {
+            var warning_msg = (totalAmount === 0) ? '此類別沒有花費紀錄' : '';
+            return res.render('index', { record: filteredRecords, totalAmount, categories, warning_msg })
+          })
+          .catch(error => console.log(error))
       })
-      res.render('index', { expense: filteredExpenses, totalAmount })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
+  } else {
+    res.redirect('/')
+  }
 })
 
 module.exports = router

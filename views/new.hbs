@@ -1,4 +1,4 @@
-<form action="/expenses" method="POST" style="display: inline;">
+<form action="/records" method="POST" style="display: inline;">
   <div class="container-sm m-5" style="text-align: center">
     <div class="row mb-3">
       <div class="col-sm-2">
@@ -21,16 +21,12 @@
             required>
         </div>
         <div class="mb-3">
-          <label class="form-label">類別*：</label>
-          <input list="titles" class="form-control" style="width:200px; display:inline" name="category"
-            placeholder="Select" required>
-          <datalist id="titles">
-            <option>家居物業</option>
-            <option>交通出行</option>
-            <option>休閒娛樂</option>
-            <option>餐飲食品</option>
-            <option>其他</option>
-          </datalist>
+          <label for="categoryId" class="form-label">類別*：</label>
+          <select id="categoryId" name="categoryId" class="form-control" style="width:200px; display:inline" required>
+            {{#each categories}}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
         </div>
         <div class="mb-3">
           <label class="form-label">金額*：</label>
