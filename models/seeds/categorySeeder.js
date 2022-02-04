@@ -8,7 +8,7 @@ const db = require('../../config/mongoose')
 
 db.once('open', () => {
   Category.insertMany(categoryList).then(() => {
-    console.log('done.')
+    console.log('category seeder done.')
     process.exit()
   })
 })
